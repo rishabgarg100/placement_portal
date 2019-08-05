@@ -1,0 +1,62 @@
+{% extends "base/base_generic.html" %}
+{% block content %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+<div class="alert alert-warning" role="alert">
+<center><h2>{{society.name}}</h2></center>
+</div>
+
+
+<div class="alert alert-secondary" role="alert">
+<p><strong> Details: </strong> {{society.about}}</p><br>
+{{society.gen_sec}}<br>{{society.contact}}
+{% if society.user == request.user %}
+<a href="{% url 'update-society' society.pk %}">update detail</a>
+{% endif %}
+<hr>
+<center><h4>Latest Events</h4></center>
+{% for each in society.user.notification_set.all %}
+    
+      <div class="col-sm-12">
+      
+<div class="card card-inverse" style="background-color: #e8e4d7; border-color: #333; margin-bottom: 40px;">
+  <div class="card-block col-sm-12">
+  
+
+{% if each.image_field %}
+    <img class="card-img-top" width="100%" src="{{ each.image_field.url }}" alt="Card image cap">
+        
+      {%endif%}
+
+    <h3 class="card-title" style="color: #000"> <font size="45px"><a href="{% url 'notif_detail' each.pk %}">{{ each.heading }}</a></font> <small style="font-size: 15px"><a href="#"> {{each.user}}</a></small> <small style="font-size: 10px">{{ each.timestamp | timesince}} ago</small></h3>
+      <p class="card-text" style="color: #000;"> {{ each.description|truncatechars:40}}</p>
+    
+    </div>
+  </div>
+</div>
+        {%endfor%}
+        {% endblock %}
+<!--
+{% if notification.file %}
+   <br>
+
+   <hr>
+    <a href="{{notification.file.url}}">download file</a>
+        
+ {%endif%}
+</div>
+
+
+
+{% if notification.image_field %}
+    <img class="card-img-top" width="70%" src="{{ notification.image_field.url }}" alt="Card image cap">
+      {%endif%}
+
+
+<hr>
+-->
+
+
+

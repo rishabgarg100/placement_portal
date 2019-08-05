@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>
+      company
+    </title>
+  </head>
+  <body>
+    <div>
+      hi
+      <br>
+      <br>
+      {% for each in company_detail_list %}
+        
+        <li>  {{ each.Name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ each.CTC }}</li>
+
+
+      {% endfor %}
+    </div>
+  </body>
+</html>

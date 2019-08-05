@@ -1,0 +1,65 @@
+{% extends "base/base_generic.html" %}
+{% block headfile %}
+    <link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .bg {
+            /* The image used */
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+
+
+{% load static %}
+{% endblock %}
+{% block content %}
+<div class="row">
+{% for each in society_list %}
+        
+
+
+<div class="col-sm-4">
+      <div class="card card-inverse" style="background-color: #e8e4d7; border-color: #333; margin-bottom: 20px;">
+  <div class="card-block col-sm-">
+
+    
+    <font size="5px;"><a href="{% url 'society_detail' each.pk %}">{{ each.name }}</a></font>
+      <p class="card-text" style="color: #000;"> {{ each.about|truncatechars:40}}</p>
+    
+ </div>
+ </div>
+</div>
+{% endfor %}
+</div>
+
+
+
+
+{% if is_paginated %}
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="/?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+{% endif %}
+
+{% endblock %}

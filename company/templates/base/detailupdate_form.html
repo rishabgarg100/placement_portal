@@ -1,0 +1,17 @@
+{% extends "base/base_generic.html" %}
+
+{% block content %}
+
+
+<div class="detail-form">
+{% if society.user == request.user %}
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+    {{ form.media }}
+    {{form.as_p}}
+
+<center><button type="submit">Yup!Done</button></center>
+{% else %}
+<h1 style="color: gray">dear {{request.user}} Oops! <br>You are Trying to enter<br> unauthorized property</h1>
+{% endif%} 
+{% endblock %}

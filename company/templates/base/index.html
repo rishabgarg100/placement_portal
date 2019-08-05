@@ -1,0 +1,73 @@
+{% extends "base/base_generic.html" %}
+{% block headfile %}
+    <link href="https://fonts.googleapis.com/css?family=Germania+One" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .bg {
+            /* The image used */
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+
+
+{% load static %}
+{% endblock %}
+{% block content %}
+{% for each in notification_list %}
+        
+
+
+<div class="col-sm-12">
+      
+<div class="card card-inverse" style="background-color: #e8e4d7; border-color: #333; margin-bottom: 40px;">
+  <div class="card-block col-sm-12">
+  
+
+{% if each.image_field %}
+    <img class="card-img-top" width="100%" src="{{ each.image_field.url }}" alt="Card image cap">
+        
+      {%endif%}
+
+    <h3 class="card-title" style="color: #000"> <font size="45px"><a href="{% url 'notif_detail' each.pk %}">{{ each.heading }}</a></font> <small style="font-size: 15px"><a href="#"> {{each.user}}</a></small> <small style="font-size: 10px">{{ each.timestamp | timesince}} ago</small></h3>
+      <p class="card-text" style="color: #000;"> {{ each.description|truncatechars:40}}</p>
+      <a href="#" class="btn btn-primary">Read More</a>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+
+<hr>
+{% if is_paginated %}
+
+        <div style="">
+            <center>
+                {% if page_obj.has_previous %}
+                    <a href="/?page={{ page_obj.previous_page_number }}"><<</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="/?page={{ page_obj.next_page_number }}">>></a>
+                {% endif %}
+          </center>
+        </div>
+    
+{% endif %}
+<hr>
+
+{% endblock %}

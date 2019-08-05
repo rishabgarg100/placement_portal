@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<style>
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+</style>
+
+
+
+
+
+    <link rel="icon"
+          type="image/png"
+          href="http://shss.thapar.edu/thapar-logo.png"/>
+            <!-- Bootstrap core CSS -->
+            {% load staticfiles %}
+   <!-- <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    Custom styles for this template 
+    <link href="{% static 'css/blog-home.css' %}" rel="stylesheet">-->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+
+
+  <title>
+        DigiBoard
+    </title>
+ 
+</head>
+<body>
+     
+  <div    class="col-sm-12"> <center> <font   size="100%" ><b>Thapar Institute of Engineering & Technology DigiBoard
+         </b>   </font></center>
+       </div>
+   
+
+
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/">Thapar DigiBoard</a>
+  <a href="{% url 'todays-events' %}">Todays Events</a>
+
+  
+ 
+     
+
+   {% if user.is_authenticated %}    
+    <a  class="dropdown-item" href="{% url 'create'%}">Add Notifications</a>
+  
+    <a  class="dropdown-item" href="{% url 'logout'%}?={{request.path}}">Logout</a>
+    <a href="/accounts/password_change/">Change Password</a>
+    
+     {%else %}
+         <a href="{% url 'login'%}">  <button class="btn btn-outline-success my-2 my-sm-0" >Login</button></a>
+        {%endif%}
+   
+
+
+
+ 
+</div>
+<center>
+<div class="card border-dark mb-12" style="max-width: 18rem;">
+  <div class="card-header">Filter</div>
+  <div class="card-body text-dark">
+<a  href="/category/DOSA/"> Dean of Student Affairs</a><br>
+<a href="/category/DOAA/">Dean of Academic Affairs</a><br>
+<a href="/category/SOCIETY/">Societies-events</a><br>
+<a href="/society/">Societies</a><br>
+
+<a href="{% url 'todays-events' %}">Todays Events</a>
+
+<form>
+<div class="input-group" style="width: 100%">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="submit" value="Search">Go!</button>
+      </span>
+      <input style="background-color: lightyellow;" type="text" name='q' class="form-control" placeholder="Search for..." aria-label="Search for..." value="{{request.GET.q}}">
+    </div>
+    </form>
+  </div>
+</div>
+</center>
+
+
+<div id="main">
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+</div>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.body.style.backgroundColor = "white";
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      {%block content%}
+
+
+
+
+
+
+
+
+
+
+{%endblock%}
+
+          
+
+        
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+
+    
+
+
+
+
+
+
+
+</body>
+</html>
